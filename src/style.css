@@ -1,10 +1,16 @@
+
+.body {
+  background-color: #181a1b;
+}
+
 .input {
   width: 80%;
   height: 400px;
   font-size: 16px;
   font-family: monospace;
   padding: 10px;
-  background-color: #f2f2f2;
+  background-color: #1f2223;
+  color: white;
 }
 
 .userInput {
@@ -13,10 +19,11 @@
   font-family: "Courier New", Courier, monospace;
   font-size: 16px;
   display: inline-block;
+  border: 1px solid #767676;
   margin: 4px 2px;
-  background-color: #f2f2f2;
+  background-color: #1f2223;
   cursor: pointer;
-  color: black;
+  color: white;
 }
 
 .output {
@@ -25,14 +32,15 @@
   font-size: 16px;
   font-family: monospace;
   padding: 10px;
-  background-color: #f2f2f2;
+  background-color: #1f2223;
+  color: white;
 }
 
 .header {
   font-family: "Courier New", Courier, monospace;
   text-align: center;
   font-weight: bold;
-  color: green;
+  color: #72ff72;
   font-size: 30px;
 }
 
@@ -44,14 +52,13 @@
   font-size: 16px;
   display: inline-block;
   margin: 4px 2px;
-  background-color: white;
+  background-color: #181a1b;
   transition-duration: 0.4s;
   cursor: pointer;
-  color: black;
-  border: 2px solid green;
+  color: white;
+  border: 2px solid #00d900;
 }
 
 .button:hover {
   background-color: green;
-  color: white;
 }
