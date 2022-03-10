@@ -1,10 +1,19 @@
 
-function do_interpret()
+var running = false;
+
+async function do_interpret()
 {
+    if (running)
+        return;
+
+    running = true;
+
     const code = document.getElementById("input").value;
     const output = document.getElementById('output');
     const userInput = document.getElementById('userInput').value;
-    output.value = interpret(code, userInput).replace(/\r/g, '');
+    await interpret(code, userInput, output);
+
+    running = false;
 }
 
 function modulo(x, y)
@@ -12,8 +21,15 @@ function modulo(x, y)
     return x - y * Math.floor(x / y);
 }
 
-function interpret(buffer, userInput)
+function sleep(ms)
 {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function interpret(buffer, userInput, output)
+{
+    output.value = "";
+
     var outputBuffer = "";
 
     var memorySize = 1024;
@@ -40,7 +56,7 @@ function interpret(buffer, userInput)
         {
             if (stack.length == 0)
             {
-                return 'brainfuck: error: Unmatched ] at line '+ lineCount + ', char ' + charCount;
+                output.value = 'brainfuck: error: Unmatched ] at line ' + lineCount + ', char ' + charCount;
             }
 
             var top = stack.pop();
@@ -54,7 +70,7 @@ function interpret(buffer, userInput)
 
     if (stack.length != 0)
     {
-        return 'brainfuck: error: Unmatched [ at line ' + lineCount + ', char ' + charCount;
+        output.value = 'brainfuck: error: Unmatched [ at line ' + lineCount + ', char ' + charCount;
     }
 
     var tape = [];
@@ -89,9 +105,19 @@ function interpret(buffer, userInput)
         else if (c == '.')
         {
             outputBuffer += String.fromCharCode(tape[j]);
+
+            if (outputBuffer.length > 100)
+            {
+                output.value += outputBuffer.replace(/\r/g, '');
+                outputBuffer = "";
+                await sleep(0);
+            }
         }
         else if (c == ',')
         {
+            if (userInput.length == 0)
+                continue;
+
             tape[j] = userInput.charCodeAt(0);
             userInput = userInput.substring(1);
         }
@@ -111,5 +137,5 @@ function interpret(buffer, userInput)
         }
     }
 
-    return outputBuffer;
+    output.value += outputBuffer.replace(/\r/g, '');
 }
