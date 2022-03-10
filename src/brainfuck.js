@@ -4,8 +4,7 @@ function do_interpret()
     const code = document.getElementById("input").value;
     const output = document.getElementById('output');
     const userInput = document.getElementById('userInput').value;
-    const value = interpret(code, userInput).replace(/\r/g, '');
-    output.value = value;
+    output.value = interpret(code, userInput).replace(/\r/g, '');
 }
 
 function modulo(x, y)

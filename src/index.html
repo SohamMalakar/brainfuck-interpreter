@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A Brainfuck editor &amp; interpreter, written in JavaScript."
+    />
+    <title>Brainfuck Interpreter</title>
 
-<head>
-    <title>
-        Brainfuck Interpreter
-    </title>
-
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 
     <script type="text/javascript" src="brainfuck.js"></script>
-</head>
+  </head>
 
-<body class="body">
+  <body class="body">
     <div class="header">Brainfuck Interpreter</div>
-    <br>
-    
+    <br />
+
     <textarea class="input" id="input">your brainfuck code</textarea>
-    <br>
+    <br />
 
     <textarea class="output" id="output"></textarea>
-    <br>
-    
+    <br />
+
     <button class="button" onclick="do_interpret()">Interpret</button>
 
-    <input class="userInput" id="userInput" value="user input">
-</body>
-
+    <input class="userInput" id="userInput" value="user input" />
+  </body>
 </html>
