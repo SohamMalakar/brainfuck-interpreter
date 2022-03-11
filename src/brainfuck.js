@@ -48,7 +48,7 @@ async function interpret(buffer, userInput, output)
             lineCount++;
             charCount = 1;
         }
-        if (c == '[')
+        else if (c == '[')
         {
             stack.push(i);
         }
@@ -57,6 +57,7 @@ async function interpret(buffer, userInput, output)
             if (stack.length == 0)
             {
                 output.value = 'brainfuck: error: Unmatched ] at line ' + lineCount + ', char ' + charCount;
+                return;
             }
 
             var top = stack.pop();
@@ -71,6 +72,7 @@ async function interpret(buffer, userInput, output)
     if (stack.length != 0)
     {
         output.value = 'brainfuck: error: Unmatched [ at line ' + lineCount + ', char ' + charCount;
+        return;
     }
 
     var tape = [];
@@ -116,7 +118,10 @@ async function interpret(buffer, userInput, output)
         else if (c == ',')
         {
             if (userInput.length == 0)
+            {
+                tape[j] = 0;
                 continue;
+            }
 
             tape[j] = userInput.charCodeAt(0);
             userInput = userInput.substring(1);
